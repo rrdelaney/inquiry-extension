@@ -8,7 +8,7 @@ i.searchTerm = function() {
 }
 
 i.loadVideo = function(onLoad) {
-    fetch(`http://backend.inquiry.tech:9000/exists/${i.videoId}`)
+    fetch(`https://backend.inquiry.tech:9000/exists/${i.videoId}`)
         .then(function(res) {
             if (res.status >= 400) {
                 document.getElementsByClassName('i-search-icon')[0]
@@ -102,7 +102,7 @@ i.clearMarkers = function() {
 
 i.doSearch = function() {
     i.clearMarkers()
-    fetch(`http://backend.inquiry.tech:9000/query/${i.videoId}/${i.searchTerm()}`)
+    fetch(`https://backend.inquiry.tech:9000/query/${i.videoId}/${i.searchTerm()}`)
         .then(function(res) {
             return res.json()
         }).then(function(times) {
