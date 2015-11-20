@@ -18,11 +18,16 @@ i.loadVideo = function(onLoad) {
             if (res.status >= 400) {
                 node.setAttribute('class', 'i-search-icon not-loaded')
                 document.getElementsByClassName('i-container')[0].onclick = function() {
+                    node.setAttribute('class', 'i-search-icon loading fa-spin')
                     fetch(`https://backend.inquiry.tech:9000/process/${i.videoId()}`)
-                    node.setAttribute('class', 'i-search-icon')
-                    document.getElementsByClassName('i-container')[0].onclick = function() {
+                    document.getElementsByClassName('i-search')[0].setAttribute('class', 'i-search processing')
+
+                    setTimeout(function() {
+                        console.log('should be done')
+                        node.setAttribute('class', 'i-search-icon')
+                        document.getElementsByClassName('i-search')[0].setAttribute('class', 'i-search')
                         document.getElementsByClassName('i-search')[0].disabled = false
-                    }
+                    }, 25000)
                 }
             } else {
                 node.setAttribute('class', 'i-search-icon')
