@@ -1,0 +1,69 @@
+.home-banner {
+    padding: 3vh 0;
+    text-align: center;
+    background-color: rgba(0, 0, 0, .75);
+    font-family: 'Megrim';
+    color: white;
+}
+
+.slide {
+    font-family: 'Raleway';
+    text-align: center;
+}
+
+.slide-banner {
+    top: 0;
+    position: absolute;
+    width: 100vw;
+    text-align: center;
+    color: white;
+}
+
+.slide-banner h1 {
+    font-size: 48pt;
+}
+
+.animation-slide h1 {
+    font-size: 48pt;
+}
+
+.blue {
+    background-color: #000066;
+}
+
+.red {
+    background-color: red;
+}
+
+.card {
+    background-color: rgba(30, 30, 30, .98);
+    min-height: 100%;
+    color: white;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    padding-right: 5rem;
+    padding-left: 5rem;
+    margin: 0 auto;
+}
+
+.typed-cursor{
+    opacity: 1;
+    -webkit-animation: blink 0.7s infinite;
+    -moz-animation: blink 0.7s infinite;
+    animation: blink 0.7s infinite;
+}
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-moz-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}

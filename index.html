@@ -6,11 +6,13 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.1/jquery.fullPage.min.css">
         <link href='https://fonts.googleapis.com/css?family=VT323|Raleway:400,200,700' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Megrim' rel='stylesheet' type='text/css'>
+        <link href='style.css' rel='stylesheet' type='text/css'>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.1/vendors/jquery.easings.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.1/vendors/jquery.slimscroll.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.1/jquery.fullPage.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.1/typed.min.js"></script>
         <script src="jquery.vide.min.js"></script>
 
         <script>
@@ -21,66 +23,26 @@
                 $('#fullpage').fullpage({
                     afterLoad: function(anchor, index) {
                         if (index === 2) {
-                            setTimeout(function() {
-                                $('#search').fadeOut(function() {
-                                    $('#search').html('Find')
-                                    $('#search').fadeIn()
-                                })
-                            }, 100)
+                            $('#search').typed({
+                                strings: ["Search", "Get"],
+                                typeSpeed: 60,
+                                backSpeed: 60,
+                                startDelay: 200,
+                                backDelay: 1500,
+                                callback: function() {
+                                    $('#need').fadeTo(500, 0, function() {
+                                        $('#need').html('Want')
+                                        setTimeout(function() {
+                                            $('#need').fadeTo(500, 1)
+                                        }, 500)
+                                    })
+                                }
+                            });
                         }
                     }
                 });
             });
         </script>
-        <style>
-            .home-banner {
-                padding: 3vh 0;
-                text-align: center;
-                background-color: rgba(0, 0, 0, .75);
-                font-family: 'Megrim';
-                color: white;
-            }
-
-            .slide {
-                font-family: 'Raleway';
-                text-align: center;
-            }
-
-            .slide-banner {
-                top: 0;
-                position: absolute;
-                width: 100vw;
-                text-align: center;
-                color: white;
-            }
-
-            .slide-banner h1 {
-                font-size: 48pt;
-            }
-
-            .animation-slide h1 {
-                font-size: 48pt;
-            }
-
-            .blue {
-                background-color: #000066;
-            }
-
-            .red {
-                background-color: red;
-            }
-
-            .card {
-                background-color: rgba(30, 30, 30, .98);
-                min-height: 100%;
-                color: white;
-                padding-top: 5rem;
-                padding-bottom: 5rem;
-                padding-right: 5rem;
-                padding-left: 5rem;
-                margin: 0 auto;
-            }
-        </style>
     </head>
     <body>
         <div id="fullpage">
@@ -91,7 +53,7 @@
             </div>
             <div class="section slide">
                 <div class="card">
-                    <h1><span id="search">Search</span> What <i class="fa fa-lg fa-inverse fa-search" style="padding:1rem"></i> You <span id="need">Need</span></h1>
+                    <h1><span id="search"></span> What <i class="fa fa-lg fa-inverse fa-search" style="padding:1rem"></i> You <span id="need">Need</span></h1>
                     <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
                 </div>
             </div>
