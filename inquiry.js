@@ -1,7 +1,9 @@
 
 var i = {}
 
-i.videoId = window.location.search.split('=')[1]
+i.videoId = function() {
+    return window.location.search.split('=')[1]
+}
 
 i.searchTerm = function() {
     return document.getElementsByClassName('i-search')[0].value.toLowerCase()
@@ -11,12 +13,12 @@ i.loadVideo = function(onLoad) {
     var node = document.getElementsByClassName('i-search-icon')[0]
     node.setAttribute('class', 'i-search-icon loading fa-spin')
 
-    fetch(`https://backend.inquiry.tech:9000/exists/${i.videoId}`)
+    fetch(`https://backend.inquiry.tech:9000/exists/${i.videoId()}`)
         .then(function(res) {
             if (res.status >= 400) {
                 node.setAttribute('class', 'i-search-icon not-loaded')
                 document.getElementsByClassName('i-container')[0].onclick = function() {
-                    fetch(`https://backend.inquiry.tech:9000/process/${i.videoId}`)
+                    fetch(`https://backend.inquiry.tech:9000/process/${i.videoId()}`)
                     node.setAttribute('class', 'i-search-icon')
                     document.getElementsByClassName('i-container')[0].onclick = function() {
                         document.getElementsByClassName('i-search')[0].disabled = false
@@ -73,12 +75,13 @@ i.createSearch = function(onSearch) {
 
         var input = document.createElement('input')
         input.setAttribute('type', 'text')
+        input.setAttribute('autocomplete', 'off')
         input.setAttribute('class', 'i-search')
         input.setAttribute('name', 'i-searcher')
         input.disabled = true
 
         var results = document.createElement('label')
-        results.setAttribute('class', 'i-results hint--top')
+        results.setAttribute('class', 'i-results')
 
         var submit = document.createElement('input')
         submit.setAttribute('type', 'submit')
@@ -110,7 +113,7 @@ i.clearMarkers = function() {
 
 i.doSearch = function() {
     i.clearMarkers()
-    fetch(`https://backend.inquiry.tech:9000/query/${i.videoId}/${i.searchTerm()}`)
+    fetch(`https://backend.inquiry.tech:9000/query/${i.videoId()}/${i.searchTerm()}`)
         .then(function(res) {
             return res.json()
         }).then(function(times) {
@@ -119,12 +122,6 @@ i.doSearch = function() {
             })
 
             var results = document.getElementsByClassName('i-results')[0]
-            results.setAttribute('data-hint', times.map(function(time) {
-                var minutes = Math.floor(time / 60)
-                var seconds = time - (minutes * 60)
-                return `${minutes}:${seconds}`
-            }).join('\n'))
-
             results.textContent = `${times.length} Results`
         })
 }
@@ -147,3 +144,10 @@ i.search = function(term) {
 i.loadYTPlayer()
 i.createSearch(i.search)
 i.loadVideo()
+
+document.addEventListener('spfdone' , function() {
+    i.clearMarkers()
+    i.loadYTPlayer()
+    i.createSearch(i.search)
+    i.loadVideo()
+})

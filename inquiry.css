@@ -77,3 +77,11 @@
     right: .2rem;
     text-decoration: underline;
 }
+
+[data-hint]::after {
+    white-space: pre;
+    line-height: auto;
+    z-index: 99999;
+    position: absolute;
+    line-height: 50px;
+}

@@ -2,7 +2,7 @@
     "name": "inquiry",
     "manifest_version": 2,
     "description": "YouTube++",
-    "version": "0.1",
+    "version": "0.2",
     "permissions": ["tabs", "*://*.youtube.com/watch*", "https://backend.inquiry.tech:9000/"],
     "content_scripts": [{
         "matches": ["*://*.youtube.com/watch*"],
