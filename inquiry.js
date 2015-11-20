@@ -1,6 +1,12 @@
 
 var i = {}
 
+i.videoId = window.location.search.split('=')[1]
+
+i.searchTerm = function() {
+    return document.getElementsByClassName('i-search')[0].value
+}
+
 i.loadYTPlayer = function() {
     var script = document.createElement('script')
     script.textContent = `(function() {
@@ -11,7 +17,7 @@ i.loadYTPlayer = function() {
     i.ytargs = JSON.parse(document.body.getAttribute('ytplayer'))
 }
 
-i.createMarker = function(time) {
+i.createMarker = function(time, text) {
     var videoLength = parseInt(i.ytargs.length_seconds)
     var width = document.getElementsByClassName('ytp-progress-list')[0].clientWidth
     var left = Math.floor((time / videoLength) * width)
@@ -19,8 +25,10 @@ i.createMarker = function(time) {
     var marker = (function() {
         var e = document.createElement('div')
         e.setAttribute('class', 'ytp-ad-progress i-marker hint--bottom')
-        e.setAttribute('data-hint', 'HURR')
+        e.setAttribute('data-hint', text)
+        e.style.width = '' + Math.max(Math.ceil(width / videoLength), 6) + 'px'
         e.style.left = '' + left + 'px'
+        e.style['backgroundColor'] = 'mediumspringgreen'
         return e
     })()
 
@@ -64,16 +72,21 @@ i.createSearch = function(onSearch) {
 
 i.clearMarkers = function() {
     var elements = document.getElementsByClassName('i-marker')
-    for (var i = 0; i < elements.length; ++i) {
-        elements[i].remove()
+    for (var j = 0; j < elements.length; j++) {
+        elements[j].style.display = 'none'
     }
 }
 
-var index = 0;
 i.doSearch = function() {
     i.clearMarkers()
-    i.createMarker(index)
-    index += 60
+    fetch(`http://104.236.166.190:9000/query/${i.videoId}/${i.searchTerm()}`)
+        .then(function(res) {
+            return res.json()
+        }).then(function(times) {
+            times.forEach(function(time) {
+                i.createMarker(time, i.searchTerm())
+            })
+        })
 }
 
 var spinnerTimeout = undefined;

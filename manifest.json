@@ -3,7 +3,7 @@
     "manifest_version": 2,
     "description": "YouTube++",
     "version": "0.1",
-    "permissions": ["tabs", "*://*.youtube.com/watch*"],
+    "permissions": ["tabs", "*://*.youtube.com/watch*", "http://104.236.166.190:9000/"],
     "content_scripts": [{
         "matches": ["*://*.youtube.com/watch*"],
         "js": ["inquiry.js"],

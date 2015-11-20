@@ -66,8 +66,3 @@
 .i-search-icon.loading:before {
     content: "\f110";
 }
-
-.i-marker {
-    width: 8px !important;
-    background-color: blue !important;
-}
