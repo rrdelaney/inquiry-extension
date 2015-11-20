@@ -68,10 +68,8 @@
 }
 
 .i-results {
-    margin-left: -55px;
+    position: absolute;
+    top: .3rem;
+    right: .2rem;
     text-decoration: underline;
-}
-
-.i-search:not(:focus) + .i-results {
-    display: none;
 }

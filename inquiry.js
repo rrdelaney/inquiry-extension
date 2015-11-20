@@ -4,7 +4,7 @@ var i = {}
 i.videoId = window.location.search.split('=')[1]
 
 i.searchTerm = function() {
-    return document.getElementsByClassName('i-search')[0].value
+    return document.getElementsByClassName('i-search')[0].value.toLowerCase()
 }
 
 i.loadVideo = function(onLoad) {
@@ -21,7 +21,7 @@ i.loadVideo = function(onLoad) {
                 document.getElementsByClassName('i-search')[0].disabled = false
             }
 
-            onLoad()
+            //onLoad()
         })
 }
 
@@ -70,7 +70,7 @@ i.createSearch = function(onSearch) {
         input.disabled = true
 
         var results = document.createElement('label')
-        results.setAttribute('class', 'i-results')
+        results.setAttribute('class', 'i-results hint--top')
 
         var submit = document.createElement('input')
         submit.setAttribute('type', 'submit')
@@ -78,7 +78,7 @@ i.createSearch = function(onSearch) {
 
         container.appendChild(label)
         container.appendChild(input)
-        //container.appendChild(results)
+        container.appendChild(results)
         container.appendChild(submit)
 
         container.onsubmit = function(e) {
@@ -109,6 +109,15 @@ i.doSearch = function() {
             times.forEach(function(time) {
                 i.createMarker(time, i.searchTerm())
             })
+
+            var results = document.getElementsByClassName('i-results')[0]
+            results.setAttribute('data-hint', times.map(function(time) {
+                var minutes = Math.floor(time / 60)
+                var seconds = time - (minutes * 60)
+                return `${minutes}:${seconds}`
+            }).join('\n'))
+
+            results.textContent = `${times.length} Results`
         })
 }
 
