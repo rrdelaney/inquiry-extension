@@ -27,6 +27,11 @@
     font-size: 48pt;
 }
 
+.slide-header {
+    padding-bottom: 1rem;
+    text-decoration: underline;
+}
+
 .blue {
     background-color: #000066;
 }

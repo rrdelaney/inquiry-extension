@@ -14,35 +14,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.1/jquery.fullPage.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.1/typed.min.js"></script>
         <script src="jquery.vide.min.js"></script>
-
-        <script>
-            $(function() {
-                $('#slide-three-title').hide();
-                $('#slide-three-introducing').hide();
-                $('#slide-three-politik').hide();
-                $('#fullpage').fullpage({
-                    afterLoad: function(anchor, index) {
-                        if (index === 2) {
-                            $('#search').typed({
-                                strings: ["Search", "Get"],
-                                typeSpeed: 60,
-                                backSpeed: 60,
-                                startDelay: 200,
-                                backDelay: 1500,
-                                callback: function() {
-                                    $('#need').fadeTo(500, 0, function() {
-                                        $('#need').html('Want')
-                                        setTimeout(function() {
-                                            $('#need').fadeTo(500, 1)
-                                        }, 500)
-                                    })
-                                }
-                            });
-                        }
-                    }
-                });
-            });
-        </script>
+        <script src="script.js"></script>
     </head>
     <body>
         <div id="fullpage">
@@ -51,13 +23,18 @@
                     <h1 style="font-size: 72pt;">inquiry</h1>
                 </div>
             </div>
-            <div class="section slide">
-                <div class="card">
-                    <h1><span id="search"></span> What <i class="fa fa-lg fa-inverse fa-search" style="padding:1rem"></i> You <span id="need">Need</span></h1>
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+            <div class="section slide" style="background-color:rgb(30, 30, 30);color:white">
+                <h1><span id="search"></span> What <i class="fa fa-lg fa-inverse fa-search" style="padding:1rem"></i> You <span id="need">Need</span></h1>
+                <div class="row" style="max-width:1000px;margin:0 auto">
+                    <div class="col-md-6" style="padding-top:5rem">
+                        <h2 class="slide-header">Remembering is Hard</h2>
+                    </div>
+                    <div class="col-md-6" style="padding-top:5rem">
+                        <h2 class="slide-header">Searching Isn't</h2>
+                    </div>
                 </div>
             </div>
-            <div class="section slide">
+            <div class="section slide" style="background-color:rgb(30, 30, 30);color:white">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4">
