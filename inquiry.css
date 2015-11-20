@@ -63,6 +63,10 @@
     content: "\f002";
 }
 
+.i-search-icon.not-loaded:before {
+    content: "\f00e";
+}
+
 .i-search-icon.loading:before {
     content: "\f110";
 }

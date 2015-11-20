@@ -3,10 +3,15 @@
     "manifest_version": 2,
     "description": "YouTube++",
     "version": "0.1",
-    "permissions": ["tabs", "*://*.youtube.com/watch*", "http://backend.inquiry.tech:9000/"],
+    "permissions": ["tabs", "*://*.youtube.com/watch*", "https://backend.inquiry.tech:9000/"],
     "content_scripts": [{
         "matches": ["*://*.youtube.com/watch*"],
         "js": ["inquiry.js"],
         "css": ["hint.css", "inquiry.css"]
-    }]
+    }],
+    "icons": {
+        "16": "logo16.png",
+        "48": "logo48.png",
+        "128": "logo128.png"
+    }
 }

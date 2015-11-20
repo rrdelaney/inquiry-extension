@@ -8,17 +8,25 @@ i.searchTerm = function() {
 }
 
 i.loadVideo = function(onLoad) {
+    var node = document.getElementsByClassName('i-search-icon')[0]
+    node.setAttribute('class', 'i-search-icon loading fa-spin')
+
     fetch(`https://backend.inquiry.tech:9000/exists/${i.videoId}`)
         .then(function(res) {
             if (res.status >= 400) {
-                document.getElementsByClassName('i-search-icon')[0]
-                    .setAttribute('class', 'fa-spin i-search-icon loading')
-
-                // wait for server to process video
-            }
-
-            document.getElementsByClassName('i-container')[0].onclick = function() {
-                document.getElementsByClassName('i-search')[0].disabled = false
+                node.setAttribute('class', 'i-search-icon not-loaded')
+                document.getElementsByClassName('i-container')[0].onclick = function() {
+                    fetch(`https://backend.inquiry.tech:9000/process/${i.videoId}`)
+                    node.setAttribute('class', 'i-search-icon')
+                    document.getElementsByClassName('i-container')[0].onclick = function() {
+                        document.getElementsByClassName('i-search')[0].disabled = false
+                    }
+                }
+            } else {
+                node.setAttribute('class', 'i-search-icon')
+                document.getElementsByClassName('i-container')[0].onclick = function() {
+                    document.getElementsByClassName('i-search')[0].disabled = false
+                }
             }
 
             //onLoad()
