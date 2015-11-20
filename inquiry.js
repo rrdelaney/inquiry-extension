@@ -7,6 +7,24 @@ i.searchTerm = function() {
     return document.getElementsByClassName('i-search')[0].value
 }
 
+i.loadVideo = function(onLoad) {
+    fetch(`http://104.236.166.190:9000/exists/${i.videoId}`)
+        .then(function(res) {
+            if (res.status >= 400) {
+                document.getElementsByClassName('i-search-icon')[0]
+                    .setAttribute('class', 'fa-spin i-search-icon loading')
+
+                // wait for server to process video
+            }
+
+            document.getElementsByClassName('i-container')[0].onclick = function() {
+                document.getElementsByClassName('i-search')[0].disabled = false
+            }
+
+            onLoad()
+        })
+}
+
 i.loadYTPlayer = function() {
     var script = document.createElement('script')
     script.textContent = `(function() {
@@ -49,6 +67,10 @@ i.createSearch = function(onSearch) {
         input.setAttribute('type', 'text')
         input.setAttribute('class', 'i-search')
         input.setAttribute('name', 'i-searcher')
+        input.disabled = true
+
+        var results = document.createElement('label')
+        results.setAttribute('class', 'i-results')
 
         var submit = document.createElement('input')
         submit.setAttribute('type', 'submit')
@@ -56,6 +78,7 @@ i.createSearch = function(onSearch) {
 
         container.appendChild(label)
         container.appendChild(input)
+        //container.appendChild(results)
         container.appendChild(submit)
 
         container.onsubmit = function(e) {
@@ -106,3 +129,4 @@ i.search = function(term) {
 
 i.loadYTPlayer()
 i.createSearch(i.search)
+i.loadVideo()

@@ -23,16 +23,16 @@
     line-height: 22px;
 }
 
-.i-search:hover {
+.i-search:disabled:hover {
     color: white;
     background: #c8c8c8;
 }
 
-.i-search:not(:focus) {
+.i-search:disabled {
     color: rgba(0, 0, 0, 0);
 }
 
-.i-search:focus {
+.i-search:not(:disabled) {
     -webkit-transition: width 0.6s cubic-linear, border-radius 0.6s, background 0.6s;
     transition: width 0.6s cubic-linear, border-radius 0.6s, background 0.6s;
     border: none;
@@ -48,7 +48,7 @@
 
 .i-search-icon {
     position: relative;
-    left: 20px;
+    left: 19px;
     cursor: pointer;
     display: inline-block;
     font: normal normal normal 10px/1 FontAwesome;
@@ -65,4 +65,13 @@
 
 .i-search-icon.loading:before {
     content: "\f110";
+}
+
+.i-results {
+    margin-left: -55px;
+    text-decoration: underline;
+}
+
+.i-search:not(:focus) + .i-results {
+    display: none;
 }
