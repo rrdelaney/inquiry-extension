@@ -1,0 +1,12 @@
+{
+    "name": "inquiry",
+    "manifest_version": 2,
+    "description": "YouTube++",
+    "version": "0.1",
+    "permissions": ["tabs", "*://*.youtube.com/watch*"],
+    "content_scripts": [{
+        "matches": ["*://*.youtube.com/watch*"],
+        "js": ["inquiry.js"],
+        "css": ["hint.css", "inquiry.css"]
+    }]
+}
