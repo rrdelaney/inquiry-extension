@@ -1,0 +1,12 @@
+{
+    "name": "inquiry",
+    "manifest_version": 2,
+    "description": "Making Videos Searchable",
+    "version": "1.0",
+    "permissions": ["tabs", "*://*.youtube.com/watch*", "https://backend.inquiry.tech:9000/"],
+    "content_scripts": [{
+        "matches": ["*://*.youtube.com/watch*"],
+        "js": ["build.js"],
+        "css": ["build.css"]
+    }]
+}

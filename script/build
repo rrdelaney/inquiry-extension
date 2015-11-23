@@ -1,0 +1,3 @@
+cp manifest.json target/manifest.json
+cat src/*.css src/**/*.css > target/build.css
+npm run-script watch
