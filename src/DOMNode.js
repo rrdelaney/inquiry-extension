@@ -1,4 +1,4 @@
-export default function DOMNode (tag, classes, others, children) {
+export function DOMNode (tag, classes, others, children) {
   var node = document.createElement(tag)
 
   if (classes) {
@@ -9,6 +9,8 @@ export default function DOMNode (tag, classes, others, children) {
     Object.keys(others).forEach(key => {
       if (key === 'disabled') {
         node.disabled = others[key]
+      } else if (key === 'style') {
+        Object.keys(others.style).forEach(prop => node.style[prop] = others.style[prop])
       } else {
         node.setAttribute(key, others[key])
       }
@@ -20,4 +22,8 @@ export default function DOMNode (tag, classes, others, children) {
   }
 
   return node
+}
+
+export function $ (query) {
+  return document.querySelector(query)
 }

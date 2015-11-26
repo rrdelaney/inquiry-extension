@@ -1,8 +1,7 @@
 function isLoaded(id, callback) {
   fetch(`https://backend.inquiry.tech:9000/exists/${id}`)
-    .then(function (res) {
-      callback(res.status < 400)
-    })
+    .then(res => res.status < 400)
+    .then(callback)
 }
 
 function search(id, term, callback) {
@@ -12,23 +11,10 @@ function search(id, term, callback) {
 }
 
 function loadVideo(id, loading, onFinish) {
-  console.log(`Loading video ${id}`)
 
-  let stream = new EventSource('backend.inquiry.tech/loading')
-  stream.onmessage = (e) => {
-    let data = JSON.parse(e.data)
-    loading(data.percent)
-
-    if (data.percent === 100) {
-      stream.onmessage = null
-      loadingDone()
-    }
-  }
-
-  onFinish()
 }
 
-export default function inquiry (vars, init, provider, consumer) {
+export default function inquiry (vars, init, provider, consumer, reloadOn) {
   if (vars) {
     console.log(`Injecting sciprt: requesting ${vars.join(',')}`)
     let script = document.createElement('script')
@@ -58,4 +44,8 @@ export default function inquiry (vars, init, provider, consumer) {
   }
 
   init(args, isLoaded, loadVideo, loadingDone)
+
+  if (reloadOn) {
+    reloadOn(() => init(args, isLoaded, loadVideo, loadingDone))
+  }
 }
